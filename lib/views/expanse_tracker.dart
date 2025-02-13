@@ -28,6 +28,13 @@ class _ExpenseTrackerState extends State<ExpenseTracker> {
     });
   }
 
+  void _deleteExpense(int index) {
+    setState(() {
+      total -= _expense[index].amount;
+      _expense.removeAt(index);
+    });
+  }
+
   void _showForm(BuildContext context) {
     TextEditingController titleController = TextEditingController();
     TextEditingController amountController = TextEditingController();
@@ -140,16 +147,20 @@ class _ExpenseTrackerState extends State<ExpenseTracker> {
             child: ListView.builder(
               itemCount: _expense.length,
               itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.blueAccent,
-                      child: Text(_expense[index].category[0]),
+                return Dismissible(
+                  onDismissed: (direction) => _deleteExpense,
+                  key: Key(_expense[index].hashCode.toString()),
+                  child: Card(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.blueAccent,
+                        child: Text(_expense[index].category[0]),
+                      ),
+                      title: Text(_expense[index].title),
+                      subtitle:
+                          Text(DateFormat.yMMMd().format(_expense[index].date)),
+                      trailing: Text('\$${_expense[index].amount.toString()}'),
                     ),
-                    title: Text(_expense[index].title),
-                    subtitle:
-                        Text(DateFormat.yMMMd().format(_expense[index].date)),
-                    trailing: Text('\$${_expense[index].amount.toString()}'),
                   ),
                 );
               },
