@@ -148,7 +148,7 @@ class _ExpenseTrackerState extends State<ExpenseTracker> {
               itemCount: _expense.length,
               itemBuilder: (context, index) {
                 return Dismissible(
-                  onDismissed: (direction) => _deleteExpense,
+                  onDismissed: (direction) => _deleteExpense(index),
                   key: Key(_expense[index].hashCode.toString()),
                   child: Card(
                     child: ListTile(
