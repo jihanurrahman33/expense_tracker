@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/expense.dart';
+import 'package:intl/intl.dart';
 
 class ExpenseTracker extends StatefulWidget {
   const ExpenseTracker({super.key});
@@ -146,7 +147,8 @@ class _ExpenseTrackerState extends State<ExpenseTracker> {
                       child: Text(_expense[index].category[0]),
                     ),
                     title: Text(_expense[index].title),
-                    subtitle: Text(_expense[index].date.toString()),
+                    subtitle:
+                        Text(DateFormat.yMMMd().format(_expense[index].date)),
                     trailing: Text('\$${_expense[index].amount.toString()}'),
                   ),
                 );
