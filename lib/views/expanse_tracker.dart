@@ -34,6 +34,9 @@ class _ExpenseTrackerState extends State<ExpenseTracker> {
       _expense.removeAt(index);
     });
   }
+  _editExpense(){
+    print('edit');
+  }
 
   void _showForm(BuildContext context) {
     TextEditingController titleController = TextEditingController();
